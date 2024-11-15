@@ -1,0 +1,50 @@
+{% extends 'Navbar/fac_navbar.html' %}
+{% load static %}
+<html>
+<head>
+    <title>Blog Post</title>
+</head>
+<body>
+{% block body %}
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h2>BLOG POST</h2>
+      <br><br>
+      <h3>Add Post</h3>
+      <form method="post" action="{% url 'add_post' %}">{% csrf_token %}
+        {{ form.as_p }}
+        <br><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <div class="col-auto d-flex align-items-center">
+      <div style="border-left: 2px solid black; height: 100%;"></div>
+    </div>
+    <div class="col">
+      <br><br>
+      <strong> Output will be displayed Here</strong>
+      <h2>Blog Posts</h2>
+      <ul>
+        {% for post in posts %}
+          <li>
+            <strong>{{ post.title }}</strong>
+            <p>{{ post.content }}</p>
+            <a href="{% url 'delete_post' post.pk %}">Delete</a>
+          </li>
+        {% empty %}
+          <li>No posts available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+</body>
+</html>

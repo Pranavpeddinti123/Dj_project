@@ -1,0 +1,43 @@
+{% extends 'Navbar/Projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Contact List</h2>
+
+    <div class="row">
+        {% for contact in contacts %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ contact.name }}</h5>
+                        <p class="card-text">
+                            <strong>Email:</strong> {{ contact.email }}<br>
+                            <strong>Phone:</strong> {{ contact.phone_number }}<br>
+                            <strong>Address:</strong> {{ contact.address }}
+                        </p>
+                        <!-- Delete button with inline form to stay on the same page -->
+                        <form method="post" action="{% url 'contact_delete' contact.id %}" class="text-end">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No contacts available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

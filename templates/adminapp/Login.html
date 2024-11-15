@@ -1,0 +1,79 @@
+{% extends 'Navbar/Projectnavbar.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container d-flex justify-content-center align-items-center mt-5">
+        <form method="POST" action="{% url 'login' %}" class="w-100" style="max-width: 400px;">
+            {% csrf_token %}
+
+            <!-- Display messages if any (like success or error notifications) -->
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Non-field errors (for general form validation issues) -->
+            {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h2 align="center">LOGIN</h2>
+
+            <!-- Username input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="username" name="username" class="form-control" required />
+                <label class="form-label" for="username">Username</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="password" name="password" class="form-control" required />
+                <label class="form-label" for="password">Password</label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+        </form>
+    </div>
+{% endblock %}
+
+<style>
+    body {
+        background-color: #EEEEEE;
+    }
+    .navbar {
+        background-color: white !important;
+    }
+    .nav-link:hover {
+        text-decoration: underline;
+    }
+    .navbar-brand {
+        margin-left: 90px;
+    }
+    .navname {
+        margin-left: 20px;
+    }
+    .form-container {
+        width: 400px !important;
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 4px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .form-container img {
+        display: block;
+        margin: 0 auto 2.5rem;
+    }
+    .form-control {
+        height: 50px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 2rem;
+    }
+</style>
